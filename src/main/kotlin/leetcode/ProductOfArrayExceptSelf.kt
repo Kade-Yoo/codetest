@@ -12,6 +12,18 @@ class ProductOfArrayExceptSelf {
      * 자기 자신 index를 제외한 값을 모두 곱한 값
      */
     fun productExceptSelf(nums: IntArray): IntArray {
+        val result = IntArray(nums.size)
+        result[0] = 1
+        for (index in 1 until nums.size) {
+            result[index] = result[index - 1] * nums[index - 1]
+        }
 
+        var multiple = 1
+        for (index in nums.size - 2 downTo 0) {
+            result[index] *= (nums[index + 1] * multiple)
+            multiple *= nums[index + 1]
+        }
+
+        return result
     }
 }
